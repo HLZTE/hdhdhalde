@@ -1,0 +1,54 @@
+/* Общие стили */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: #121212;
+    color: #FFFFFF;
+}
+
+#game {
+    text-align: center;
+    background: #1E1E1E;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#balance {
+    margin-bottom: 20px;
+    font-size: 1.5em;
+    transition: transform 0.3s ease-in-out;
+}
+
+#balance-value {
+    font-weight: 700;
+}
+
+/* Стили для кнопки */
+#mine-button {
+    width: 200px;
+    height: 50px;
+    border: none;
+    background-color: #6200EE;
+    color: white;
+    font-size: 1em;
+    font-weight: 700;
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.3s, transform 0.3s;
+    border-radius: 25px;
+}
+
+#mine-button:hover {
+    background-color: #3700B3;
+    transform: scale(1.1);
+}
+
+#mine-button:active {
+    background-color: #03DAC5;
+    transform: scale(1);
+}
