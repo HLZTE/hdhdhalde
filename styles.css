@@ -22,14 +22,13 @@ body {
     text-align: center;
     background: #1E1E1E;
     box-sizing: border-box;
+    padding-top: 20px;
 }
 
 #balance {
-    width: 100%;
     display: flex;
-    justify-content: center;
     align-items: center;
-    margin-top: 20px;
+    margin-bottom: 20px;
     font-size: 2.6em;
     font-weight: 700;
 }
@@ -49,8 +48,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex: 1;
     width: 100%;
-    height: calc(100% - 50px); /* Adjust for balance height */
 }
 
 /* Стили для кнопки */
@@ -66,6 +65,7 @@ body {
     outline: none;
     transition: background-color 0.3s, transform 0.3s;
     border-radius: 25px;
+    margin-top: 20%;
 }
 
 #mine-button:hover {
@@ -76,4 +76,32 @@ body {
 #mine-button:active {
     background-color: #03DAC5;
     transform: scale(1);
+}
+
+/* Стили для навигационной панели */
+#nav-bar {
+    width: 100%;
+    background-color: #222222;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px 0;
+    position: fixed;
+    bottom: 0;
+}
+
+.nav-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #FFFFFF;
+    font-size: 0.9em;
+}
+
+.nav-button img {
+    width: 30px;
+    height: 30px;
+    margin-bottom: 5px;
+    filter: invert(1);
 }
