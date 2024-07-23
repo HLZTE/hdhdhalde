@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let db;
     const request = indexedDB.open('clickerGame', 1);
     const balanceValueElement = document.getElementById('balance-value');
+    const balanceContainer = document.getElementById('balance');
     const mineButton = document.getElementById('mine-button');
     let miningInterval;
 
@@ -88,4 +89,38 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Ошибка при загрузке баланса', event);
         };
     }
+
+    const navButtons = document.querySelectorAll('.nav-button');
+    navButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const targetPageId = button.getAttribute('data-target');
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => {
+                page.classList.remove('active');
+                page.style.opacity = '0';
+                setTimeout(() => {
+                    page.style.display = 'none';
+                }, 300); // Длительность transition в CSS
+            });
+            setTimeout(() => {
+                const targetPage = document.getElementById(targetPageId);
+                targetPage.style.display = 'flex';
+                setTimeout(() => {
+                    targetPage.classList.add('active');
+                    targetPage.style.opacity = '1';
+                }, 10); // Небольшая задержка для запуска transition
+            }, 300);
+
+            // Обновляем активное состояние кнопок навигации
+            navButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+
+            // Скрываем или показываем баланс
+            if (targetPageId === 'mine-page') {
+                balanceContainer.classList.remove('hidden');
+            } else {
+                balanceContainer.classList.add('hidden');
+            }
+        });
+    });
 });
