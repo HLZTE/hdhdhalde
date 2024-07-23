@@ -9,28 +9,40 @@
 </head>
 <body>
     <div id="game">
-        <div id="balance">
+        <div id="balance" class="hidden">
             <img src="coin.png" alt="Монета" id="coin-image">
             <span id="balance-value">0</span>
-
         </div>
+        
         <div id="main-content">
-            <button id="mine-button" disabled>Запустить майнинг</button>
+            <div class="page" id="mine-page">
+                <button id="mine-button" disabled>Запустить майнинг</button>
+            </div>
+            <div class="page" id="task-page" style="display: none;">
+                <p>Task Page Content</p>
+            </div>
+            <div class="page" id="frens-page" style="display: none;">
+                <p>Frens Page Content</p>
+            </div>
+            <div class="page" id="upgrade-page" style="display: none;">
+                <p>Upgrade Page Content</p>
+            </div>
         </div>
+        
         <div id="nav-bar">
-            <div class="nav-button">
+            <div class="nav-button active" data-target="mine-page">
                 <img src="mine-icon.png" alt="Mine">
                 <span>Mine</span>
             </div>
-            <div class="nav-button">
+            <div class="nav-button" data-target="task-page">
                 <img src="task-icon.png" alt="Task">
                 <span>Task</span>
             </div>
-            <div class="nav-button">
+            <div class="nav-button" data-target="frens-page">
                 <img src="frens-icon.png" alt="Frens">
                 <span>Frens</span>
             </div>
-            <div class="nav-button">
+            <div class="nav-button" data-target="upgrade-page">
                 <img src="upgrade-icon.png" alt="Upgrade">
                 <span>Upgrade</span>
             </div>
