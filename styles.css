@@ -101,7 +101,7 @@ body {
     color: #FFFFFF;
     font-size: 1.7em;
     font-weight: 700;
-    animation: fadeOut 1s forwards;
+    animation: fadeOut 2s forwards;
     pointer-events: none;
     user-select: none;
     font-family: 'Roboto', sans-serif;
