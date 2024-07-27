@@ -1,10 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     let db;
     const request = indexedDB.open('clickerGame', 1);
-    const balanceValueElement = document.getElementById('balance-value');
-    const balanceContainer = document.getElementById('balance');
-    const mineButton = document.getElementById('mine-button');
-    let miningInterval;
 
     request.onerror = (event) => {
         console.error('Ошибка при открытии IndexedDB', event);
@@ -13,10 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
     request.onsuccess = (event) => {
         db = event.target.result;
         loadBalance();
-        mineButton.disabled = false;
-        mineButton.addEventListener('click', () => {
-            startMining(true);
-        });
     };
 
     request.onupgradeneeded = (event) => {
@@ -24,34 +16,26 @@ document.addEventListener('DOMContentLoaded', () => {
         const objectStore = db.createObjectStore('balance', { keyPath: 'id' });
         objectStore.transaction.oncomplete = () => {
             const balanceObjectStore = db.transaction('balance', 'readwrite').objectStore('balance');
-            balanceObjectStore.add({ id: 'currentBalance', value: 0, lastUpdate: Date.now(), isMining: false });
+            balanceObjectStore.add({ id: 'currentBalance', value: 1, lastUpdate: Date.now(), isMining: false });
         };
     };
 
-    function startMining(manualStart = false) {
-        clearInterval(miningInterval);
+    function updateBalance(value) {
+        const transaction = db.transaction(['balance'], 'readwrite');
+        const objectStore = transaction.objectStore('balance');
+        const request = objectStore.get('currentBalance');
 
-        miningInterval = setInterval(() => {
-            const transaction = db.transaction(['balance'], 'readwrite');
-            const objectStore = transaction.objectStore('balance');
-            const request = objectStore.get('currentBalance');
+        request.onsuccess = (event) => {
+            const data = event.target.result;
+            data.value = parseInt(data.value) + value;
+            objectStore.put(data);
 
-            request.onsuccess = (event) => {
-                const data = event.target.result;
-                const now = Date.now();
-                const secondsPassed = (now - data.lastUpdate) / 1000;
+            document.getElementById('balance-value').textContent = data.value;
+        };
 
-                data.value = parseFloat(data.value) + (secondsPassed * 0.0000001);
-                data.lastUpdate = now;
-                if (manualStart) data.isMining = true;
-                balanceValueElement.textContent = data.value.toFixed(10);
-                objectStore.put(data);
-            };
-
-            request.onerror = (event) => {
-                console.error('Ошибка при получении баланса', event);
-            };
-        }, 1000);
+        request.onerror = (event) => {
+            console.error('Ошибка при обновлении баланса', event);
+        };
     }
 
     function loadBalance() {
@@ -62,32 +46,49 @@ document.addEventListener('DOMContentLoaded', () => {
         request.onsuccess = (event) => {
             if (event.target.result) {
                 const data = event.target.result;
-                const now = Date.now();
-                const secondsPassed = (now - data.lastUpdate) / 1000;
-
-                if (isNaN(data.value)) {
-                    data.value = 0;
-                }
-
-                data.value = parseFloat(data.value) + (secondsPassed * 0.0000001);
-                data.lastUpdate = now;
-                balanceValueElement.textContent = data.value.toFixed(10);
-
-                const updateTransaction = db.transaction(['balance'], 'readwrite');
-                const updateObjectStore = updateTransaction.objectStore('balance');
-                updateObjectStore.put(data);
-
-                if (data.isMining) {
-                    startMining();
-                }
-
-                console.log(`Баланс после загрузки: ${data.value}`);
+                document.getElementById('balance-value').textContent = data.value;
             }
         };
 
         request.onerror = (event) => {
             console.error('Ошибка при загрузке баланса', event);
         };
+    }
+
+    const clickButton = document.getElementById('click-button');
+    if (clickButton) {
+        clickButton.addEventListener('click', (event) => {
+            const rect = clickButton.getBoundingClientRect();
+            const x = event.clientX - rect.left;
+            const y = event.clientY - rect.top;
+
+            // Добавляем наклон в сторону клика
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            const rotateX = (y - centerY) / centerY * 15;
+            const rotateY = (centerX - x) / centerX * 15;
+            clickButton.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+
+            // Сбрасываем наклон через 150ms
+            setTimeout(() => {
+                clickButton.style.transform = '';
+            }, 150);
+
+            // Добавляем эффект клика
+            const clickEffect = document.createElement('div');
+            clickEffect.className = 'click-effect';
+            clickEffect.style.left = `${x}px`;
+            clickEffect.style.top = `${y}px`;
+            clickEffect.textContent = '1';
+            clickButton.parentElement.appendChild(clickEffect);
+
+            setTimeout(() => {
+                clickEffect.remove();
+            }, 1000);
+
+            // Обновляем баланс
+            updateBalance(1);
+        });
     }
 
     const navButtons = document.querySelectorAll('.nav-button');
@@ -114,13 +115,10 @@ document.addEventListener('DOMContentLoaded', () => {
             // Обновляем активное состояние кнопок навигации
             navButtons.forEach(btn => btn.classList.remove('active'));
             button.classList.add('active');
-
-            // Скрываем или показываем баланс
-            if (targetPageId === 'mine-page') {
-                balanceContainer.classList.remove('hidden');
-            } else {
-                balanceContainer.classList.add('hidden');
-            }
         });
     });
+
+    // Устанавливаем главную страницу при загрузке
+    document.getElementById('mine-page').classList.add('active');
+    document.querySelector('[data-target="mine-page"]').classList.add('active');
 });
