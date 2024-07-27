@@ -9,14 +9,13 @@
 </head>
 <body>
     <div id="game">
-        <div id="balance" class="hidden">
-            <img src="coin.png" alt="Монета" id="coin-image">
-            <span id="balance-value">0</span>
+        <div id="balance-container">
+            <img src="coin-icon.png" alt="Coin" id="coin-image">
+            <span id="balance-value">1</span>
         </div>
-        
         <div id="main-content">
-            <div class="page" id="mine-page">
-                <button id="mine-button" disabled>Запустить майнинг</button>
+            <div class="page active" id="mine-page">
+                <img src="coin-icon.png" id="click-button" alt="Click Button">
             </div>
             <div class="page" id="task-page" style="display: none;">
                 <p>Task Page Content</p>
