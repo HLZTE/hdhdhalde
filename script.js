@@ -106,21 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         clickButton.addEventListener('touchmove', (event) => {
-            event.preventDefault();
-            const touches = event.changedTouches;
-            for (let i = 0; i < touches.length; i++) {
-                const touch = touches[i];
-                updateClickEffect(touch.pageX, touch.pageY, touch.identifier);
-            }
-        });
-
-        clickButton.addEventListener('touchend', (event) => {
-            event.preventDefault();
-            const touches = event.changedTouches;
-            for (let i = 0; i < touches.length; i++) {
-                const touch = touches[i];
-                removeClickEffect(touch.identifier);
-            }
+            event.preventDefault(); // Prevent default touch actions
         });
 
         clickButton.addEventListener('click', (event) => {
