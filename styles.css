@@ -86,9 +86,12 @@ body {
     transition: transform 0.3s ease-in-out;
     object-fit: contain; /* Сохранение пропорций */
     outline: none; /* Убираем выделение */
+    -webkit-tap-highlight-color: transparent; /* Убираем выделение на мобильных устройствах */
+    user-select: none; /* Убираем выделение текста */
 }
 
-#click-button:active {
+#click-button:active,
+#click-button:focus {
     outline: none; /* Убираем выделение */
 }
 
@@ -140,6 +143,8 @@ body {
     transition: color 0.3s ease-in-out;
     outline: none; /* Убираем выделение */
     border: none; /* Remove any default border */
+    -webkit-tap-highlight-color: transparent; /* Убираем выделение на мобильных устройствах */
+    user-select: none; /* Убираем выделение текста */
 }
 
 .nav-button img {
@@ -150,12 +155,17 @@ body {
     transition: filter 0.3s ease-in-out;
     outline: none; /* Убираем выделение */
     border: none; /* Remove any default border */
+    user-select: none; /* Prevent selection */
 }
 
 .nav-button:focus,
-.nav-button img:focus {
+.nav-button img:focus,
+.nav-button:active,
+.nav-button img:active {
     outline: none; /* Убираем выделение */
     border: none; /* Remove any default border */
+    user-select: none; /* Prevent selection */
+    -webkit-tap-highlight-color: transparent; /* Убираем выделение на мобильных устройствах */
 }
 
 .nav-button.active,
@@ -167,4 +177,3 @@ body {
 .nav-button:hover img {
     filter: invert(59%) sepia(75%) saturate(2000%) hue-rotate(173deg) brightness(99%) contrast(101%);
 }
-
