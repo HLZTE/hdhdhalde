@@ -39,7 +39,7 @@ body {
 }
 
 #balance-value {
-    margin-left: 20px; /* Сдвиг вправо */
+    margin-left: 2px; /* Сдвиг вправо */
     transition: transform 0.3s ease-in-out;
 }
 
@@ -80,14 +80,15 @@ body {
 
 /* Стили для кнопки клика */
 #click-button {
-    width: 250px; /* Увеличение размера */
-    height: 250px; /* Увеличение размера */
+    width: 290px; /* Увеличение размера */
+    height: 290px; /* Увеличение размера */
     cursor: pointer;
     transition: transform 0.3s ease-in-out;
     object-fit: contain; /* Сохранение пропорций */
     outline: none; /* Убираем выделение */
     -webkit-tap-highlight-color: transparent; /* Убираем выделение на мобильных устройствах */
     user-select: none; /* Убираем выделение текста */
+    position: relative; /* Ensure click effects appear correctly */
 }
 
 #click-button:active,
