@@ -26,22 +26,28 @@ body {
 }
 
 #balance-container {
-    display: flex;
+    display: none;
     align-items: center;
     margin-bottom: 10px;
     font-size: 2.6em;
     font-weight: 700;
+    margin-top: 20px; /* Сдвиг вниз */
+}
+
+#balance-container.active {
+    display: flex;
 }
 
 #balance-value {
-    margin-left: 10px;
+    margin-left: 20px; /* Сдвиг вправо */
     transition: transform 0.3s ease-in-out;
 }
 
 #coin-image {
-    width: 30px;
-    height: 30px;
-    object-fit: cover; /* Сохранение пропорций */
+    width: 40px; /* Увеличение размера */
+    height: 40px; /* Увеличение размера */
+    object-fit: contain; /* Сохранение пропорций */
+    margin-right: 10px; /* Сдвиг вправо */
 }
 
 #main-content {
@@ -74,10 +80,11 @@ body {
 
 /* Стили для кнопки клика */
 #click-button {
-    width: 200px;
-    height: 200px;
+    width: 250px; /* Увеличение размера */
+    height: 250px; /* Увеличение размера */
     cursor: pointer;
     transition: transform 0.3s ease-in-out;
+    object-fit: contain; /* Сохранение пропорций */
     outline: none; /* Убираем выделение */
 }
 
@@ -128,15 +135,15 @@ body {
     justify-content: center;
     align-items: center;
     color: #FFFFFF;
-    font-size: 0.9em;
+    font-size: 0.8em; /* Чуть уменьшили шрифт */
     cursor: pointer;
     transition: color 0.3s ease-in-out;
     outline: none; /* Убираем выделение */
 }
 
 .nav-button img {
-    width: 30px;
-    height: 30px;
+    width: 25px; /* Чуть уменьшили размер иконок */
+    height: 25px; /* Чуть уменьшили размер иконок */
     margin-bottom: 5px;
     filter: invert(1);
     transition: filter 0.3s ease-in-out;
