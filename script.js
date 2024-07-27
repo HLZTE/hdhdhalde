@@ -35,9 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('selectstart', (event) => {
         event.preventDefault();
     });
-});
 
-document.addEventListener('DOMContentLoaded', () => {
     let db;
     let clickValue = 1; // Initial click value
     const request = indexedDB.open('clickerGame', 1);
@@ -159,7 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function createClickEffect(x, y, identifier) {
         const clickEffect = document.createElement('div');
-        clickEffect.className = 'click-effect';
+        clickEffect.className = 'click-effect visible'; // Начинаем с видимого
         clickEffect.id = `effect-${identifier}`;
         clickEffect.style.left = `${x}px`;
         clickEffect.style.top = `${y}px`;
@@ -167,9 +165,14 @@ document.addEventListener('DOMContentLoaded', () => {
         clickEffect.textContent = `+${clickValue}`;
         document.body.appendChild(clickEffect);
 
+        // Добавляем класс для запуска анимации
+        requestAnimationFrame(() => {
+            clickEffect.classList.add('fade-out');
+        });
+
         setTimeout(() => {
             clickEffect.remove();
-        }, 1000);
+        }, 1000); // Даем время для завершения анимации
     }
 
     function updateClickEffect(x, y, identifier) {
