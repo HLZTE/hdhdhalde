@@ -95,13 +95,13 @@ body {
 #click-button:focus {
     outline: none; /* Убираем выделение */
 }
-
+/* Стили для эффекта клика */
 .click-effect {
     position: absolute;
     color: #FFFFFF;
-    font-size: 1.7em;
+    font-size: 1.5em;
     font-weight: 700;
-    animation: fadeOut 2s forwards;
+    animation: fadeOut 1s forwards;
     pointer-events: none;
     user-select: none;
     font-family: 'Roboto', sans-serif;
@@ -117,7 +117,6 @@ body {
         transform: translateY(-50px);
     }
 }
-
 /* Стили для навигационной панели */
 #nav-bar {
     width: 100%;
