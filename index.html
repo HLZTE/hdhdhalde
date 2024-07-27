@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
 
-    <title>КЛикпхер</title>
+    <title>Кликпхер</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -20,13 +20,16 @@
                 <img src="coin-icon.png" id="click-button" alt="Click Button">
             </div>
             <div class="page" id="task-page" style="display: none;">
-                <p>Task Page Content</p>
+                <div class="task-ribbon"></div>
             </div>
             <div class="page" id="frens-page" style="display: none;">
-                <p>Frens Page Content</p>
+                <div id="frens-container">
+                    <span id="friends-count">0</span>
+                    <button id="invite-friend-button">Invite a Friend</button>
+                </div>
             </div>
             <div class="page" id="upgrade-page" style="display: none;">
-                <p>Upgrade Page Content</p>
+                <button id="upgrade-button">Upgrade Click</button>
             </div>
         </div>
         <div id="nav-bar">
